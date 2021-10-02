@@ -1,7 +1,20 @@
+
 ### We create a bunch of helpful functions throughout the course.
 ### Storing them here so they're easily accessible.
 
-import tensorflow as tf
+def calculate_results(y_true, y_pred):
+  """ 
+  Calculates model accuracy, precision, recall and f1 score of a binary classification model
+  """
+
+  model_accuracy=round(accuracy_score(y_true, y_pred)*100, ndigits=2)
+  model_precision, model_recall, model_f1,_=precision_recall_fscore_support(y_true, y_pred, average='weighted')
+  model_results={"accuracy": model_accuracy,
+                 "precision": round(model_precision*100,ndigits=2),
+                 "recall": round(model_recall*100,ndigits=2),
+                 "f1":round(model_f1*100,ndigits=2)}
+  return model_results
+
 
 # Create a function to import an image and resize it to be able to be used with our model
 def load_and_prep_image(filename, img_shape=224, scale=True):
